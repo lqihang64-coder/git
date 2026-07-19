@@ -1,0 +1,56 @@
+<view class="container chat-container">
+
+  <scroll-view 
+    scroll-y 
+    class="chat-list" 
+    scroll-into-view="{{toView}}" 
+    scroll-with-animation 
+    enable-flex
+  >
+    <block wx:for="{{messages}}" wx:key="index">
+      <view class="msg-row {{item.role === 'user' ? 'user' : 'ai'}}" id="msg-{{index}}">
+        
+        <view wx:if="{{item.role === 'ai'}}" class="avatar ai-avatar">
+          <text>🤖</text>
+        </view>
+
+        <view class="msg-bubble">
+          <rich-text nodes="{{item.contentHtml}}"></rich-text>
+        </view>
+
+        <view wx:if="{{item.role === 'user'}}" class="avatar user-avatar" style="overflow: hidden;">
+          <image wx:if="{{userAvatar}}" src="{{userAvatar}}" style="width: 100%; height: 100%; object-fit: cover;" mode="aspectFill" />
+          <text wx:else>🧑‍💻</text>
+        </view>
+      </view>
+    </block>
+
+    <view wx:if="{{isLoading}}" class="msg-row ai" id="msg-loading">
+      <view class="avatar ai-avatar">🤖</view>
+      <view class="msg-bubble loading-bubble">
+        <view class="dot"></view>
+        <view class="dot"></view>
+        <view class="dot"></view>
+      </view>
+    </view>
+
+    <view style="height: 40rpx;"></view>
+  </scroll-view>
+
+  <view class="input-area">
+    <view class="input-box">
+      <input 
+        class="chat-input"
+        value="{{inputText}}" 
+        bindinput="onInput" 
+        bindconfirm="onSend"
+        confirm-type="send"
+        placeholder="对当前冷知识有何疑问？随时问我..." 
+        cursor-spacing="20"
+      />
+      <view class="btn-send {{inputText ? 'active' : ''}}" bindtap="onSend">
+        <text class="icon-send">↑</text>
+      </view>
+    </view>
+  </view>
+</view>

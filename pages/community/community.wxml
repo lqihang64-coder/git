@@ -1,0 +1,105 @@
+<view class="container">
+  <view class="page-header">
+    <text class="page-title">广场</text>
+    <text class="page-desc">在这里，遇见有趣的灵魂</text>
+    <view class="icon-bell">🔔</view>
+  </view>
+
+  <scroll-view scroll-y class="post-list" bindscrolltolower="onScrollToLower" lower-threshold="100">
+    <block wx:for="{{posts}}" wx:key="id">
+      <view class="card post-card">
+        <!-- 用户行：真实头像 + 昵称 + "我"角标 -->
+        <view class="user-row">
+          <view class="avatar-container">
+            <image
+              wx:if="{{item.author.avatarUrl && !item.avatarError}}"
+              src="{{item.author.avatarUrl}}"
+              class="user-avatar"
+              mode="aspectFill"
+              binderror="onAvatarError"
+              data-index="{{index}}"
+            />
+            <view
+              wx:else
+              class="user-avatar avatar-fallback"
+              style="background: {{avatarColor(item.author.nickname)}}"
+            >
+              <text class="avatar-letter">{{item.author.nickname[0]}}</text>
+            </view>
+            <view wx:if="{{item.isOwner}}" class="owner-badge">我</view>
+          </view>
+          <view class="user-info">
+            <view class="user-top">
+              <text class="user-name">{{item.author.nickname}}</text>
+              <text class="post-time">{{item.time}}</text>
+            </view>
+          </view>
+        </view>
+
+        <text class="post-content">{{item.content}}</text>
+
+        <!-- AI 回复 -->
+        <view wx:if="{{item.aiReply}}" class="ai-reply-box">
+          <text class="sparkle-icon">✨</text>
+          <text class="reply-text"><text class="reply-label">AI 点评：</text>{{item.aiReply}}</text>
+        </view>
+
+        <!-- 评论区 -->
+        <view wx:if="{{item.comments && item.comments.length > 0}}" class="comments-box">
+          <block wx:for="{{item.comments}}" wx:for-item="comment" wx:key="id">
+            <view class="comment-item">
+              <text class="comment-author">{{comment.author.nickname}}：</text>
+              <text class="comment-content">{{comment.content}}</text>
+            </view>
+          </block>
+        </view>
+
+        <!-- 操作栏 -->
+        <view class="post-actions">
+          <view class="action-item" bindtap="onLike" data-index="{{index}}">
+            <text>{{item.hasLiked ? '❤️' : '🤍'}}</text>
+            <text>{{item.likes}}</text>
+          </view>
+          <view class="action-item" bindtap="onComment" data-index="{{index}}">
+            <text>💬</text>
+            <text>{{item.commentCount || 0}}</text>
+          </view>
+          <view wx:if="{{item.isOwner}}" class="action-item action-delete" bindtap="onDelete" data-index="{{index}}">
+            <text>🗑️</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 加载更多 -->
+    <view wx:if="{{isLoadingMore}}" class="loading-more">
+      <text>加载中...</text>
+    </view>
+    <view wx:elif="{{!hasMore && posts.length > 0}}" class="loading-more">
+      <text>— 已经到底了 —</text>
+    </view>
+
+    <view style="height: 120rpx;"></view>
+  </scroll-view>
+
+  <view class="fab-btn" bindtap="openModal">+</view>
+
+  <!-- 发布弹窗 -->
+  <view wx:if="{{showModal}}" class="modal-overlay">
+    <view class="modal-backdrop" bindtap="closeModal"></view>
+    <view class="modal-content animate-slide-up">
+      <view class="modal-handle"></view>
+      <view class="modal-header">
+        <text class="modal-title">发布动态</text>
+        <button class="btn-publish {{postContent ? 'active' : ''}}" bindtap="onPublish">发布</button>
+      </view>
+      <textarea
+        class="modal-input"
+        placeholder="分享此刻的学习感悟..."
+        value="{{postContent}}"
+        bindinput="onInput"
+        fixed="true"
+      />
+    </view>
+  </view>
+</view>

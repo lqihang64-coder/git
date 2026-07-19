@@ -1,0 +1,33 @@
+# 环境变量 — 含 API Key 等敏感信息，绝对不可提交
+.env
+server/.env
+
+# 依赖
+node_modules/
+server/node_modules/
+
+# 数据库 — 含用户数据（含 WAL 临时文件）
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite-journal
+
+# 上传文件
+server/uploads/
+
+# 微信开发者工具 — 个人配置
+project.private.config.json
+miniprogram_npm/
+
+# Claude Code
+.claude/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
+
+# 部署打包产物
+server-deploy.tar.gz

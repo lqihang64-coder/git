@@ -1,0 +1,7 @@
+<view class="container" style="padding: 30rpx;">
+  <knowledge-card wx:if="{{card}}" card="{{card}}"></knowledge-card>
+  
+  <view style="text-align: center; margin-top: 40rpx; color: #94A3B8; font-size: 24rpx;">
+    <text>💡 温故而知新，可以为师矣</text>
+  </view>
+</view>

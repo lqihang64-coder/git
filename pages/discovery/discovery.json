@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "今日探索",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#F5F7FA",
+  "usingComponents": {
+    "knowledge-card": "/components/knowledge-card/knowledge-card"
+  }
+}

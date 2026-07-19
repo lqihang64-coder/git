@@ -1,0 +1,115 @@
+<view class="container">
+  
+  <!-- 1. 旗舰级 Header -->
+  <view class="header">
+    <view class="header-top">
+      <text class="date">{{todayDate || 'TODAY'}}</text>
+      <!-- 打卡胶囊 (样式已更新) -->
+      <view class="checkin-capsule {{hasCheckedIn ? 'checked' : ''}}" bindtap="onCheckIn">
+        <view class="check-icon" wx:if="{{!hasCheckedIn}}"></view>
+        <text>{{hasCheckedIn ? '已签到' : '打卡'}}</text>
+      </view>
+    </view>
+    <text class="title">今日探索</text>
+  </view>
+
+  <!-- 2. 骨架屏 -->
+  <view wx:if="{{loading}}" class="skeleton-container">
+    <view class="skeleton-box title-sk"></view>
+    <view class="skeleton-box content-sk"></view>
+    <view class="skeleton-box content-sk short"></view>
+  </view>
+
+  <!-- 3. 内容滚动区 -->
+  <scroll-view wx:else scroll-y class="content-scroll">
+    <view class="content-wrapper">
+      
+      <!-- 主知识卡片 -->
+      <view class="premium-card fade-in-up">
+        
+        <!-- 标签与声波 -->
+        <view class="card-meta">
+          <view class="card-tags-row">
+            <view class="category-badge" wx:for="{{card.tags}}" wx:key="*this">{{item}}</view>
+          </view>
+          <view class="sound-icon">
+            <view class="bar"></view><view class="bar"></view><view class="bar"></view>
+          </view>
+        </view>
+
+        <!-- 标题 -->
+        <view class="hero-section">
+          <text class="hero-title">{{card.title}}</text>
+          <view class="hero-subtitle-box">
+            <text class="hero-subtitle">{{card.subtitle}}</text>
+          </view>
+        </view>
+
+        <!-- 正文 (优化排版) -->
+        <view class="article-body">
+          <text class="article-text" user-select>{{card.content}}</text>
+        </view>
+
+        <!-- AI 深度解析 (保持好评的样式) -->
+        <view class="insight-card">
+          <view class="insight-header">
+            <text class="insight-icon">✦</text>
+            <text class="insight-title">深度解析</text>
+          </view>
+          <text class="insight-text" user-select>{{card.aiInsight}}</text>
+        </view>
+
+      </view>
+
+      <!-- 趣味测验（仅卡片含 quiz 时显示） -->
+      <view wx:if="{{card.quiz}}" class="quiz-container fade-in-up delay-1">
+        <view class="section-label">知识小测</view>
+        <view class="quiz-card">
+          <text class="quiz-question">{{card.quiz.question}}</text>
+
+          <view class="options-list">
+            <block wx:for="{{card.quiz.options}}" wx:key="index">
+              <view
+                class="option-row {{selectedOption === index ? (index === card.quiz.correctIndex ? 'correct' : 'wrong') : ''}} {{selectedOption !== null && index === card.quiz.correctIndex ? 'correct-answer' : ''}}"
+                bindtap="onSelectOption"
+                data-index="{{index}}"
+              >
+                <view class="option-letter">{{['A', 'B', 'C','D'][index]}}</view>
+                <text class="option-content">{{item}}</text>
+
+                <!-- 状态图标 -->
+                <view class="status-indicator" wx:if="{{selectedOption === index}}">
+                  <icon type="{{index === card.quiz.correctIndex ? 'success_no_circle' : 'cancel'}}" size="16" color="#FFF"/>
+                </view>
+              </view>
+            </block>
+          </view>
+
+          <view wx:if="{{selectedOption !== null}}" class="explanation-box" style="margin-top:24rpx; background:#F1F5F9; padding:24rpx; border-radius:16rpx;">
+            <text style="font-weight:700; color:#334155; font-size:26rpx;">💡 解析：</text>
+            <text style="color:#64748B; font-size:26rpx; line-height:1.5;">{{card.quiz.explanation}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 底部浮动操作栏 -->
+      <view class="floating-action-bar fade-in-up delay-2">
+        <button class="btn-next" bindtap="onNextCard" hover-class="btn-hover">
+          <text>我懂了，下一张</text>
+          <text class="arrow">→</text>
+        </button>
+        <view 
+  class="btn-chat" 
+  bindtap="onOpenChat" 
+  hover-class="btn-hover"
+  style="background: linear-gradient(135deg, #6062ca 0%, #aba7f3 100%) !important; border: none !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 6rpx 20rpx rgba(79, 70, 229, 0.35) !important; border-radius: 50% !important;"
+>
+  <text style="font-size: 38rpx; line-height: 1; transform: translateY(-2rpx); text-shadow: 0 2rpx 4rpx rgba(0,0,0,0.1);">🤖</text>
+</view>
+      </view>
+
+      <view style="height: 100rpx;"></view>
+
+    </view>
+  </scroll-view>
+</view>

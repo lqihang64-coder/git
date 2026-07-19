@@ -1,0 +1,86 @@
+.page-header {
+  background: #FFF; padding: 30rpx 40rpx; border-bottom: 1rpx solid #F1F5F9;
+  position: sticky; top: 0; z-index: 99;
+}
+.page-title { font-size: 48rpx; font-weight: 800; color: var(--text-main); display: block; }
+.page-desc { font-size: 24rpx; color: var(--text-muted); font-weight: 500; }
+.icon-bell { position: absolute; right: 40rpx; top: 40rpx; width: 64rpx; height: 64rpx; background: #F1F5F9; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32rpx; }
+
+.post-list { flex: 1; height: calc(100vh - 120rpx); padding: 30rpx; box-sizing: border-box; }
+.post-card { padding: 32rpx; animation: fadeIn 0.4s ease-out; }
+
+.user-row { display: flex; gap: 24rpx; margin-bottom: 24rpx; align-items: center; }
+.avatar-container { position: relative; width: 80rpx; height: 80rpx; flex-shrink: 0; }
+.user-avatar { width: 80rpx; height: 80rpx; border-radius: 50%; background: #EEE; border: 2rpx solid #FFF; box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1); }
+.avatar-fallback { display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+.avatar-letter { color: #FFF; font-size: 32rpx; font-weight: 700; }
+.owner-badge {
+  position: absolute; bottom: -4rpx; right: -4rpx;
+  background: #4F46E5; color: #FFF;
+  font-size: 18rpx; font-weight: 700;
+  padding: 2rpx 10rpx; border-radius: 12rpx;
+  border: 2rpx solid #FFF; line-height: 1.4;
+}
+.user-info { flex: 1; }
+.user-top { display: flex; justify-content: space-between; align-items: center; }
+.user-name { font-size: 28rpx; font-weight: 700; color: var(--text-main); }
+.post-time { font-size: 22rpx; color: var(--text-muted); }
+.post-tag { font-size: 22rpx; color: var(--text-muted); margin-top: 4rpx; display: block; }
+
+.post-content { font-size: 28rpx; color: var(--text-body); line-height: 1.6; margin-bottom: 24rpx; padding-left: 104rpx; display: block; }
+
+.ai-reply-box { margin-left: 104rpx; background: #F8FAFC; border: 1rpx solid #F1F5F9; border-radius: 16rpx; padding: 20rpx; display: flex; gap: 10rpx; }
+.sparkle-icon { font-size: 24rpx; }
+.reply-label { color: var(--primary); font-weight: 700; }
+.reply-text { font-size: 24rpx; color: var(--text-muted); line-height: 1.5; }
+
+.post-actions { margin-left: 104rpx; display: flex; gap: 30rpx; margin-top: 24rpx; justify-content: flex-end; }
+.action-item { display: flex; gap: 8rpx; font-size: 24rpx; color: var(--text-muted); font-weight: 700; align-items: center; }
+
+/* FAB & Modal */
+.fab-btn {
+  position: fixed; right: 40rpx; bottom: 60rpx; width: 110rpx; height: 110rpx;
+  background: #1E293B; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: #FFF; font-size: 60rpx; box-shadow: 0 8rpx 20rpx rgba(30, 41, 59, 0.3); z-index: 90;
+}
+
+.modal-overlay { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; justify-content: flex-end; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.3); backdrop-filter: blur(4rpx); }
+.modal-content { background: #FFF; border-radius: 32rpx 32rpx 0 0; padding: 40rpx; position: relative; z-index: 101; min-height: 500rpx; }
+.modal-handle { width: 80rpx; height: 8rpx; background: #F1F5F9; border-radius: 4rpx; margin: 0 auto 40rpx; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30rpx; }
+.modal-title { font-size: 32rpx; font-weight: 800; color: var(--text-main); }
+.btn-publish { margin: 0; font-size: 26rpx; background: #F1F5F9; color: var(--text-muted); border-radius: 30rpx; padding: 10rpx 30rpx; font-weight: 600; }
+.btn-publish.active { background: var(--primary); color: #FFF; }
+.modal-input { width: 100%; height: 300rpx; font-size: 30rpx; color: var(--text-main); }
+
+.animate-slide-up { animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* 评论区 */
+.comments-box {
+  margin-left: 104rpx;
+  background: #F8FAFC;
+  border: 1rpx solid #F1F5F9;
+  border-radius: 16rpx;
+  padding: 16rpx 20rpx;
+  margin-top: 16rpx;
+}
+.comment-item {
+  margin-bottom: 8rpx;
+  font-size: 24rpx;
+  line-height: 1.5;
+  display: block;
+}
+.comment-author { color: #4F46E5; font-weight: 700; }
+.comment-content { color: #334155; font-weight: 500; }
+
+/* 删除按钮 */
+.action-delete text { color: #EF4444; }
+
+/* 加载更多 */
+.loading-more {
+  text-align: center;
+  padding: 30rpx 0;
+  color: #94A3B8;
+  font-size: 24rpx;
+}

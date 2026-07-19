@@ -1,0 +1,270 @@
+/* --- 全局基础 --- */
+page {
+  background-color: #F8FAFC;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
+  color: #111;
+  box-sizing: border-box;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 1. Header 升级 --- */
+.header {
+  padding: 24rpx 40rpx 16rpx;
+  background: transparent; /* 去掉背景色，更通透 */
+  z-index: 10;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.date {
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+}
+
+.title {
+  font-size: 56rpx;
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: -1rpx;
+  display: block;
+  text-shadow: 0 2rpx 0 rgba(255,255,255,0.5);
+}
+
+/* 🔥 打卡按钮 - 质感大升级 */
+.checkin-capsule {
+  background: #1E293B; /* 深邃黑蓝 */
+  padding: 10rpx 28rpx;
+  border-radius: 40rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  box-shadow: 0 8rpx 20rpx rgba(30, 41, 59, 0.25); /* 悬浮投影 */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.checkin-capsule:active {
+  transform: scale(0.95);
+  box-shadow: 0 4rpx 10rpx rgba(30, 41, 59, 0.15);
+}
+
+/* 打卡后：变为低调的镂空态 */
+.checkin-capsule.checked {
+  background: #FFFFFF;
+  color: #94A3B8;
+  box-shadow: none;
+  border: 2rpx solid #E2E8F0;
+  padding: 8rpx 26rpx; /* 补偿边框宽度 */
+}
+
+/* 未打卡时的小红点（呼吸灯） */
+.check-icon {
+  width: 12rpx; height: 12rpx;
+  border-radius: 50%;
+  background: #FF4757;
+  box-shadow: 0 0 10rpx rgba(255, 71, 87, 0.6);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- 内容区 --- */
+.content-wrapper {
+  padding: 20rpx 36rpx;
+}
+
+/* --- 2. 主知识卡片 --- */
+.premium-card {
+  background: #FFFFFF;
+  border-radius: 36rpx;
+  padding: 48rpx;
+  /* 柔和且深邃的投影，营造纸张感 */
+  box-shadow: 0 16rpx 48rpx rgba(148, 163, 184, 0.12);
+  margin-bottom: 50rpx;
+  position: relative;
+  overflow: hidden;
+  border: 1rpx solid rgba(255,255,255, 0.8);
+}
+
+/* 顶部标签 */
+.card-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 36rpx;
+}
+.card-tags-row { display: flex; flex-wrap: wrap; gap: 12rpx; }
+.category-badge {
+  font-size: 22rpx; font-weight: 800; color: #4F46E5;
+  background: #EEF2FF;
+  padding: 8rpx 20rpx; border-radius: 12rpx;
+  letter-spacing: 1rpx;
+}
+
+/* 声波动画 */
+.sound-icon { display: flex; gap: 4rpx; align-items: flex-end; height: 24rpx; opacity: 0.7; }
+.bar { width: 4rpx; background: #4F46E5; border-radius: 4rpx; animation: bounce 1s infinite; }
+.bar:nth-child(1) { height: 12rpx; animation-delay: 0s; }
+.bar:nth-child(2) { height: 20rpx; animation-delay: 0.2s; }
+.bar:nth-child(3) { height: 14rpx; animation-delay: 0.4s; }
+@keyframes bounce { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.6); } }
+
+/* 🔥 标题区升级 */
+.hero-section { margin-bottom: 40rpx; }
+.hero-title {
+  font-size: 48rpx; /* 克制的字号，更显精致 */
+  font-weight: 800; 
+  color: #0F172A;
+  line-height: 1.3; 
+  margin-bottom: 16rpx; 
+  display: block;
+}
+.hero-subtitle-box {
+  display: flex; align-items: center;
+}
+.hero-subtitle { 
+  font-size: 28rpx; color: #64748B; font-weight: 400; 
+  position: relative; padding-left: 16rpx;
+}
+.hero-subtitle::before {
+  content: ''; position: absolute; left: 0; top: 10rpx; bottom: 10rpx;
+  width: 4rpx; background: #CBD5E1; border-radius: 4rpx;
+}
+
+/* 🔥 正文区升级 - 杂志排版 */
+.article-body {
+  position: relative;
+  margin-bottom: 50rpx;
+}
+/* 装饰性引号 - 增加人文气息 */
+.article-body::before {
+  content: '“';
+  position: absolute; top: -20rpx; left: -16rpx;
+  font-size: 80rpx; color: #F1F5F9; font-family: serif;
+  z-index: 0;
+}
+
+.article-text {
+  font-size: 32rpx; 
+  color: #334155; /* Slate 700 - 舒适阅读色 */
+  line-height: 1.85; /* 宽松行高 */
+  text-align: justify; 
+  position: relative; 
+  z-index: 1;
+  letter-spacing: 0.5rpx; /* 增加字间距 */
+  font-weight: 400;
+}
+
+/* AI 解析 (保持你喜欢的样式，微调间距) */
+.insight-card {
+  background: #F8FAFC;
+  border-radius: 20rpx;
+  padding: 32rpx;
+  position: relative;
+  border: 1rpx solid #F1F5F9;
+}
+.insight-header { display: flex; align-items: center; gap: 12rpx; margin-bottom: 12rpx; }
+.insight-icon { color: #6366F1; font-size: 28rpx; }
+.insight-title { font-size: 24rpx; font-weight: 800; color: #6366F1; text-transform: uppercase; letter-spacing: 1rpx;}
+.insight-text { font-size: 28rpx; color: #475569; line-height: 1.7; font-weight: 500;}
+
+/* --- 3. 测验卡片 --- */
+.section-label {
+  font-size: 24rpx; font-weight: 800; color: #94A3B8;
+  margin-bottom: 20rpx; padding-left: 12rpx; letter-spacing: 2rpx; text-transform: uppercase;
+}
+
+.quiz-card {
+  background: #FFFFFF; border-radius: 36rpx; padding: 40rpx;
+  box-shadow: 0 8rpx 30rpx rgba(148, 163, 184, 0.08);
+  margin-bottom: 40rpx;
+  border: 1rpx solid rgba(255,255,255,0.6);
+}
+
+.quiz-question {
+  font-size: 32rpx; font-weight: 700; color: #1E293B;
+  margin-bottom: 32rpx; display: block; line-height: 1.5;
+}
+
+.option-row {
+  background: #F8FAFC;
+  border: 2rpx solid transparent;
+  padding: 24rpx 32rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+  display: flex; align-items: center;
+  transition: all 0.2s ease;
+}
+.option-row:active { transform: scale(0.99); background: #F1F5F9; }
+
+.option-letter {
+  width: 44rpx; height: 44rpx; background: #E2E8F0; color: #64748B;
+  border-radius: 12rpx; font-size: 22rpx; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin-right: 24rpx; flex-shrink: 0;
+}
+.option-content { font-size: 28rpx; color: #334155; font-weight: 500; flex: 1; }
+
+/* 选中状态 */
+.option-row.correct { background: #ECFDF5; border-color: #34C759; }
+.option-row.correct .option-letter { background: #34C759; color: #FFF; }
+.option-row.correct .option-content { color: #145226; font-weight: 700; }
+
+.option-row.wrong { background: #FEF2F2; border-color: #FF4757; }
+.option-row.wrong .option-letter { background: #FF4757; color: #FFF; }
+.option-row.wrong .option-content { color: #8B1A15; }
+
+/* 底部浮动操作栏 */
+.floating-action-bar {
+  display: flex; gap: 24rpx; margin-top: 20rpx;
+}
+.btn-next {
+  flex: 1;
+  background: #0F172A;
+  color: #FFF;
+  height: 96rpx;
+  border-radius: 48rpx;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30rpx; font-weight: 700;
+  box-shadow: 0 10rpx 30rpx rgba(15, 23, 42, 0.25);
+  gap: 12rpx;
+}
+.btn-chat {
+  width: 96rpx; height: 96rpx;
+  background: #FFF;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8rpx 20rpx rgba(148, 163, 184, 0.15);
+  border: 1rpx solid #F1F5F9;
+}
+
+/* 动画 */
+.fade-in-up { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20rpx); }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+/* 骨架屏 */
+.skeleton-container { padding: 40rpx; }
+.skeleton-box { background: #E2E8F0; border-radius: 12rpx; margin-bottom: 24rpx; animation: pulse 1.5s infinite; }
+.title-sk { width: 50%; height: 56rpx; margin-bottom: 60rpx; }
+.content-sk { width: 100%; height: 360rpx; border-radius: 32rpx; }
+.short { height: 180rpx; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }

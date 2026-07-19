@@ -1,0 +1,140 @@
+<view class="container">
+  <scroll-view scroll-y class="content-scroll">
+    
+    <view class="profile-header">
+      <view class="header-bg"></view>
+      <view class="profile-info">
+        
+        <button 
+          class="avatar-wrapper" 
+          open-type="chooseAvatar" 
+          bindchooseavatar="onChooseAvatar"
+        >
+          <image src="{{avatarDisplay || user.avatar}}" class="avatar" mode="aspectFill" />
+          <view class="edit-badge">
+            <view class="camera-icon-css"></view>
+          </view>
+        </button>
+
+        <input 
+          type="nickname" 
+          class="nickname-input" 
+          placeholder="点击设置昵称" 
+          value="{{user.nickname}}" 
+          bindchange="onNicknameChange"
+          bindblur="onNicknameChange"
+        />
+
+        <view class="level-badge">
+          <text>⚡ LV.{{user.level}} {{user.levelName}}</text>
+        </view>
+
+        <view class="stats-card">
+          <view class="stat-item">
+            <text class="stat-num">{{user.checkinDays}}</text>
+            <text class="stat-label">连续打卡</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item">
+            <text class="stat-num">{{user.cardsRead}}</text>
+            <text class="stat-label">已学卡片</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item">
+            <text class="stat-num">{{user.likesReceived}}</text>
+            <text class="stat-label">获赞</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">我的兴趣</text>
+        <view class="icon-plus" bindtap="openTagSheet" hover-class="btn-hover">+</view>
+      </view>
+      
+      <view class="tags-row">
+        <block wx:for="{{user.tags}}" wx:key="*this">
+          <view class="tag-item">
+            <text># {{item}}</text>
+          </view>
+        </block>
+        <view wx:if="{{user.tags.length === 0}}" class="empty-tip" style="width:100%">
+          点击右上角添加标签，定制专属知识库
+        </view>
+      </view>
+    </view>
+
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">学习足迹</text>
+      </view>
+
+      <view class="timeline-container" style="padding-left: 10rpx;">
+        <block wx:for="{{user.timeline}}" wx:key="*this">
+          <view class="timeline-item" style="margin-bottom: 30rpx; display: flex; align-items: flex-start;">
+            <view class="timeline-line" style="background: #E2E8F0; width: 4rpx; left: 16rpx;"></view>
+            <view class="timeline-dot" style="background: linear-gradient(135deg, #6366F1, #4F46E5); width: 16rpx; height: 16rpx; border: 4rpx solid #FFF; box-shadow: 0 0 0 6rpx rgba(79, 70, 229, 0.15); left: 6rpx; top: 12rpx;"></view>
+            <view class="timeline-content" style="background: #F8FAFC; border-radius: 16rpx; padding: 20rpx 24rpx; box-shadow: none; border: 1rpx solid #F1F5F9; flex: 1;">
+              <view class="timeline-header" style="margin-bottom: 6rpx;">
+                <text class="timeline-title" style="font-size: 28rpx; color: #1E293B; font-weight: 600;">{{item.title}}</text>
+                <text class="timeline-time" style="font-size: 22rpx; color: #94A3B8; font-weight: normal;">{{item.time}}</text>
+              </view>
+              <text class="timeline-desc" style="font-size: 24rpx; color: #64748B;">已沉淀至专属知识库</text>
+            </view>
+          </view>
+        </block>
+
+        <view wx:if="{{user.timeline.length === 0}}" class="empty-tip">
+          暂无记录，快去首页开始探索吧
+        </view>
+      </view>
+
+      <view wx:if="{{user.timeline.length >= 3}}" bindtap="onGoToHistory" style="text-align: center; margin-top: 24rpx; padding-top: 24rpx; border-top: 2rpx dashed #E2E8F0; cursor: pointer;" hover-class="none">
+        <text style="font-size: 26rpx; color: #4F46E5; font-weight: bold; letter-spacing: 1rpx; background: #EEF2FF; padding: 12rpx 40rpx; border-radius: 30rpx; box-shadow: 0 4rpx 12rpx rgba(79, 70, 229, 0.08);">查看更多历史足迹 →</text>
+      </view>
+    </view>
+
+    <view class="section-card settings-list">
+      <view class="setting-item">
+        <view class="setting-left">⚙️ <text>通用设置</text></view>
+        <text class="arrow">></text>
+      </view>
+      <view class="setting-item">
+        <view class="setting-left">🔔 <text>通知管理</text></view>
+        <text class="arrow">></text>
+      </view>
+    </view>
+
+  </scroll-view>
+
+  <view class="tag-sheet-overlay {{showTagSheet ? 'show' : ''}}" catchtouchmove>
+    <view class="tag-sheet-backdrop" bindtap="closeTagSheet"></view>
+    <view class="tag-sheet-content">
+      <view class="sheet-handle"></view>
+      <view class="sheet-header">
+        <text class="sheet-title">选择你感兴趣的领域</text>
+        <text class="sheet-subtitle">已选 {{user.tags.length}}/8 个</text>
+      </view>
+      
+      <scroll-view scroll-y class="sheet-scroll">
+        <view class="sheet-tags-container">
+          <block wx:for="{{recommendTags}}" wx:key="*this">
+            <view 
+              class="sheet-tag {{selectedTagMap[item] ? 'active' : ''}}"
+              bindtap="toggleTag" 
+              data-tag="{{item}}"
+            >
+              <text>{{item}}</text>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+
+      <view class="sheet-footer">
+  <button class="btn-confirm" bindtap="saveTags">选好了</button>
+</view>
+    </view>
+  </view>
+</view>

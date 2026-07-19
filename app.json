@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/discovery/discovery",
+    "pages/community/community",
+    "pages/profile/profile",
+    "pages/chat/chat",
+    "pages/history/history",
+    "pages/card-detail/card-detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "知学AI",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F8FAFC"
+  },
+  "tabBar": {
+    "color": "#94A3B8",
+    "selectedColor": "#4F46E5",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/discovery/discovery",
+        "text": "学习",
+        "iconPath": "assets/home.png",
+        "selectedIconPath": "assets/home-selected.png"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "广场",
+        "iconPath": "assets/tabbar-community-normal.png",
+        "selectedIconPath": "assets/tabbar-community-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/tabbar-user-normal.png",
+        "selectedIconPath": "assets/tabbar-user-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

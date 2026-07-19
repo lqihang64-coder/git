@@ -1,0 +1,35 @@
+<view class="card animate-fade-in">
+  <!-- 头部：标签与声音 -->
+  <view class="card-header">
+    <view class="card-tags">
+      <text class="category-tag" wx:for="{{card.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+    <!-- 点击播放声音 -->
+    <view class="sound-btn {{isPlaying ? 'playing' : ''}}" bindtap="onPlaySound">
+      <image class="icon-sound" src="/assets/sound.png" mode="aspectFit" /> 
+      <!-- 播放动画波纹 -->
+      <view wx:if="{{isPlaying}}" class="sound-wave"></view>
+    </view>
+  </view>
+  
+  <!-- 标题区 -->
+  <view class="title-group">
+    <text class="card-title">{{card.title}}</text>
+    <text class="card-subtitle">{{card.subtitle}}</text>
+  </view>
+
+  <!-- 内容区 -->
+  <text class="card-content" user-select>{{card.content}}</text>
+
+  <!-- AI 解析 -->
+  <view class="ai-box">
+    <view class="ai-line"></view>
+    <view>
+      <text class="ai-label">AI 深度解析</text>
+      <text class="ai-content" user-select>{{card.aiInsight}}</text>
+    </view>
+  </view>
+
+  <!-- 底部插槽：让父页面决定放什么按钮 -->
+  <slot name="footer"></slot>
+</view>

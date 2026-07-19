@@ -1,0 +1,46 @@
+<view class="history-page">
+  <view class="history-banner">
+    <view class="banner-glow"></view>
+    <text class="banner-title">时光足迹轴</text>
+    <text class="banner-subtitle">在这里，重温你探索过的每一个文明火花</text>
+  </view>
+
+  <view class="timeline-container" wx:if="{{historyList.length > 0}}">
+    <view class="timeline-main-line"></view>
+
+    <block wx:for="{{historyList}}" wx:key="index">
+      <view class="timeline-row" bindtap="onTapItem" data-title="{{item.title}}" hover-class="card-hover-active">
+        
+        <view class="timeline-left-axis">
+          <view class="timeline-glow-dot"></view>
+        </view>
+
+        <view class="history-premium-card">
+          <view class="card-meta-bar">
+            <text class="card-timestamp">🕒 {{item.time}}</text>
+            <view class="review-pill-badge">
+              <text class="badge-text">复习</text>
+              <text class="badge-arrow">→</text>
+            </view>
+          </view>
+
+          <view class="card-title-content">
+            <text class="card-main-title">{{item.title}}</text>
+          </view>
+          
+          <view class="card-footer-tip">
+            <text class="tip-spark">✨</text>
+            <text class="tip-text">点击无缝调阅完整知识要点</text>
+          </view>
+        </view>
+
+      </view>
+    </block>
+  </view>
+
+  <view class="history-empty-state" wx:else>
+    <view class="empty-icon-box">🛸</view>
+    <text class="empty-main-text">时光轴上空空如也</text>
+    <text class="empty-sub-text">快去主页研读几张新卡片沉淀知识吧</text>
+  </view>
+</view>
