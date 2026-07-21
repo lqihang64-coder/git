@@ -11,6 +11,18 @@
 | 数据库 | SQLite（本地）/ MySQL（生产） |
 | AI | DeepSeek API |
 
+## 功能预览
+
+| 学习首页 | AI 助教 | 社区广场 |
+|---|---|---|
+| ![发现页](./screenshots/discovery.png) | ![AI对话](./screenshots/chat.png) | ![社区](./screenshots/community.png) |
+
+| 个人中心 | 学习历史 | 测验交互 |
+|---|---|---|
+| ![个人中心](./screenshots/profile.png) | ![历史](./screenshots/history.png) | ![测验](./screenshots/quiz.png) |
+
+> 📸 截图保存在 `screenshots/` 目录下，替换对应文件即可更新预览图。
+
 ## 快速开始
 
 ```bash
