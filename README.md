@@ -62,7 +62,7 @@ node app.js
 
 ## 环境变量
 
-在 `server/.env` 中配置（不提交到 Git）：
+在 `server/.env` 中配置：
 
 | 变量 | 说明 |
 |---|---|
