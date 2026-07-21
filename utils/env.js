@@ -11,8 +11,8 @@ const ENV_CONFIG = {
   },
   // 火山引擎云服务器（部署后替换 IP）
   prod: {
-    baseUrl: 'http://101.96.209.133:8080/api',
-    serverRoot: 'http://101.96.209.133:8080'
+    baseUrl: 'http://your-server-ip:8080/api',
+    serverRoot: 'http://your-server-ip:8080'
   }
 };
 
