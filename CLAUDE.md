@@ -639,8 +639,8 @@ const ENV_CONFIG = {
     serverRoot: 'http://127.0.0.1:8080'    // 静态文件根路径（无 /api）
   },
   prod: {
-    baseUrl: 'http://101.96.209.133:8080/api',
-    serverRoot: 'http://101.96.209.133:8080'
+    baseUrl: 'http://your-server-ip:8080/api',
+    serverRoot: 'http://your-server-ip:8080'
   }
 };
 // CURRENT_ENV = 'dev' | 'prod'
@@ -678,11 +678,11 @@ node app.js
 
 ## 部署（火山引擎）
 
-服务器 IP：`101.96.209.133`，SSH 端口：`51617`，宝塔面板：`https://101.96.209.133:25048/b2887803`
+服务器 IP：`your-server-ip`，SSH 端口：`your-ssh-port`，宝塔面板：`https://your-server-ip:25048/your-token`
 
 ```bash
 # 上传 server/ 到服务器
-scp -P 51617 -r server/ root@101.96.209.133:/opt/daily-fact/
+scp -P your-ssh-port -r server/ root@your-server-ip:/opt/daily-fact/
 
 # 服务器上
 cd /opt/daily-fact/server
@@ -740,7 +740,7 @@ DEEPSEEK_API_KEY=sk-xxx WX_SECRET=xxx node app.js &
 
 # 生产环境 MySQL 数据库结构
 
-生产服务器 `101.96.209.133:3306`，数据库 `zhixue_ai`，MySQL 8.0。
+生产环境数据库 `zhixue_ai`，MySQL 8.0。
 
 > ⚠️ 本地 SQLite 表名/列名与生产 MySQL 不同，部署时需注意映射。
 
